@@ -10,22 +10,8 @@
 		<string>md.hbs</string>
 		<string>md</string>
 	</array>
-	<key>foldingStartMarker</key>
-	<string>(?x)
-(&lt;(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)\b.*?&gt;
-|&lt;!--(?!.*--&gt;)
-|\{\s*($|\?&gt;\s*$|//|/\*(.*\*/\s*$|(?!.*?\*/)))
-)</string>
-	<key>foldingStopMarker</key>
-	<string>(?x)
-(&lt;/(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)&gt;
-|^\s*--&gt;
-|(^|\s)\}
-)</string>
-	<key>keyEquivalent</key>
-	<string>^~M</string>
 	<key>name</key>
-	<string>Markdown Extended</string>
+	<string>Markdown</string>
 	<key>patterns</key>
 	<array>
 		<dict>
@@ -1612,7 +1598,7 @@
 				<key>6</key>
 				<dict>
 					<key>name</key>
-					<string>markup.underline.link.markdown</string>
+					<string>markup.underline.link.markdown comment</string>
 				</dict>
 				<key>7</key>
 				<dict>
@@ -1734,7 +1720,7 @@
 | [ ]{,3}&gt;.
 )</string>
 			<key>name</key>
-			<string>markup.quote.markdown</string>
+			<string>markup.quote.markdown comment</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1968,11 +1954,11 @@
 						</dict>
 					</dict>
 					<key>contentName</key>
-					<string>markup.heading.1.markdown</string>
+					<string>markup.heading.1.markdown constant.other</string>
 					<key>end</key>
 					<string>\s*(#*)$\n?</string>
 					<key>name</key>
-					<string>markup.heading.1.markdown</string>
+					<string>markup.heading.1.markdown constant.other</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1993,11 +1979,11 @@
 						</dict>
 					</dict>
 					<key>contentName</key>
-					<string>markup.heading.2.markdown</string>
+					<string>markup.heading.2.markdown constant.other</string>
 					<key>end</key>
 					<string>\s*(#*)$\n?</string>
 					<key>name</key>
-					<string>markup.heading.2.markdown</string>
+					<string>markup.heading.2.markdown constant.other</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -2018,11 +2004,11 @@
 						</dict>
 					</dict>
 					<key>contentName</key>
-					<string>markup.heading.3.markdown</string>
+					<string>markup.heading.3.markdown constant.other</string>
 					<key>end</key>
 					<string>\s*(#*)$\n?</string>
 					<key>name</key>
-					<string>markup.heading.3.markdown</string>
+					<string>markup.heading.3.markdown constant.other</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -2043,11 +2029,11 @@
 						</dict>
 					</dict>
 					<key>contentName</key>
-					<string>markup.heading.4.markdown</string>
+					<string>markup.heading.4.markdown constant.other</string>
 					<key>end</key>
 					<string>\s*(#*)$\n?</string>
 					<key>name</key>
-					<string>markup.heading.4.markdown</string>
+					<string>markup.heading.4.markdown constant.other</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -2068,11 +2054,11 @@
 						</dict>
 					</dict>
 					<key>contentName</key>
-					<string>markup.heading.5.markdown</string>
+					<string>markup.heading.5.markdown constant.other</string>
 					<key>end</key>
 					<string>\s*(#*)$\n?</string>
 					<key>name</key>
-					<string>markup.heading.5.markdown</string>
+					<string>markup.heading.5.markdown constant.other</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -2093,11 +2079,11 @@
 						</dict>
 					</dict>
 					<key>contentName</key>
-					<string>markup.heading.6.markdown</string>
+					<string>markup.heading.6.markdown constant.other</string>
 					<key>end</key>
 					<string>\s*(#*)$\n?</string>
 					<key>name</key>
-					<string>markup.heading.6.markdown</string>
+					<string>markup.heading.6.markdown constant.other</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -2180,7 +2166,7 @@
 				<key>8</key>
 				<dict>
 					<key>name</key>
-					<string>markup.underline.link.image.markdown</string>
+					<string>markup.underline.link.image.markdown comment</string>
 				</dict>
 				<key>9</key>
 				<dict>
@@ -2459,7 +2445,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>markup.underline.link.markdown</string>
+					<string>markup.underline.link.markdown comment</string>
 				</dict>
 				<key>4</key>
 				<dict>
@@ -2484,7 +2470,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>markup.underline.link.markdown</string>
+					<string>markup.underline.link.markdown comment</string>
 				</dict>
 				<key>3</key>
 				<dict>
@@ -2569,7 +2555,7 @@
 				<key>8</key>
 				<dict>
 					<key>name</key>
-					<string>markup.underline.link.markdown</string>
+					<string>markup.underline.link.markdown comment</string>
 				</dict>
 				<key>9</key>
 				<dict>
@@ -2709,7 +2695,7 @@
 			<key>match</key>
 			<string>(`+)([^`]|(?!(?&lt;!`)\1(?!`))`)*+(\1)</string>
 			<key>name</key>
-			<string>markup.raw.inline.markdown</string>
+			<string>markup.raw.inline.markdown support.class</string>
 		</dict>
 		<key>separator</key>
 		<dict>
@@ -2849,6 +2835,6 @@
 	<key>scopeName</key>
 	<string>text.html.markdown</string>
 	<key>uuid</key>
-	<string>dd477cf1-34c4-49d2-ba09-f8445676ccd4</string>
+	<string>6006E00A-CF70-11E5-A17D-488B901F17A3</string>
 </dict>
 </plist>
