@@ -1,7 +1,7 @@
 # Markdown-Highlighting
 Sublime Text 3 Markdown grammar with scope names to provide some basic highlighting in all (default) themes.
 
-Based on [Markdown Extended](https://github.com/jonschlinkert/sublime-markdown-extended), and includes GFM style fenced code blocks 
+Based on [Markdown Extended](https://github.com/jonschlinkert/sublime-markdown-extended), and includes Github Flavoured Markdown style fenced code blocks 
 
 Before
 ![](https://raw.githubusercontent.com/braver/Markdown-Highlighting/master/before.png)
