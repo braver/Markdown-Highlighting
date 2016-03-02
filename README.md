@@ -3,10 +3,10 @@ Sublime Text 3 Markdown grammar with scope names to provide some basic highlight
 
 Based on [Markdown Extended](https://github.com/jonschlinkert/sublime-markdown-extended), and includes Github Flavoured Markdown style fenced code blocks 
 
-Before
+Before  
 ![](https://raw.githubusercontent.com/braver/Markdown-Highlighting/master/before.png)
 
-After
+After  
 ![](https://raw.githubusercontent.com/braver/Markdown-Highlighting/master/after.png)
 
 
