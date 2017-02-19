@@ -11,24 +11,36 @@ file_extensions:
 scope: text.html.markdown
 contexts:
   main:
+    - match: (?=(?<!\s)---(\s*coffee|\s*json)?\n$)
+      push: front-matter
+    - match: ""
+      push: body
+  front-matter:
     - match: (?<!\s)---\n$
       push:
         - meta_scope: markup.raw.yaml.front-matter
+        - meta_content_scope: source.yaml
         - match: ^---\s
           pop: true
         - include: scope:source.yaml
     - match: (?<!\s)---\s*coffee\n$
       push:
         - meta_scope: markup.raw.coffee.front-matter
+        - meta_content_scope: source.coffee
         - match: ^---\s
           pop: true
         - include: scope:source.coffee
     - match: (?<!\s)---\s*json\n$
       push:
         - meta_scope: markup.raw.json.front-matter
+        - meta_content_scope: source.json
         - match: ^---\s
           pop: true
         - include: scope:source.json
+    - match: ""
+      pop: true
+      push: body
+  body:
     - match: |-
         (?x)^
         (?= [ ]{,3}>.
@@ -61,6 +73,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.c
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -75,6 +88,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.c++
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -89,6 +103,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.coffee
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -103,6 +118,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.jade
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -117,6 +133,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.css
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -131,6 +148,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.cs
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -145,6 +163,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.ejs
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -159,6 +178,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.erlang
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -173,6 +193,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.diff
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -187,6 +208,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.go
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -201,6 +223,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: text.html.basic
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -216,6 +239,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.ini
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -230,6 +254,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.java
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -244,6 +269,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.js
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -258,6 +284,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.json
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -272,6 +299,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.julia
         - match: '(```|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -286,6 +314,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.css.less
         - match: '(```|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -300,6 +329,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.livescript
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -314,6 +344,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.lua
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -328,6 +359,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: text.html.markdown
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -342,6 +374,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.nginx
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -356,6 +389,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.swift
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -370,6 +404,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.objc
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -384,6 +419,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.objc++
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -398,6 +434,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.perl
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -412,6 +449,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.php
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -426,6 +464,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.python
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -433,13 +472,14 @@ contexts:
             3: punctuation.definition.fenced.markdown
           pop: true
         - include: scope:source.python
-    - match: '(```|~~~)\s*\{?\s*(r)(?:[ \}].*$|\}?$)'
+    - match: '(```|~~~)\s*\{?\s*(r)(?:[ \},].*$|\}?$)'
       captures:
         1: punctuation.definition.fenced.markdown
         2: variable.language.fenced.markdown
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.r
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -454,6 +494,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.ruby
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -468,6 +509,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.rust
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -482,6 +524,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.sass
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -496,6 +539,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.scala
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -510,6 +554,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.scss
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -524,6 +569,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.shell
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -538,6 +584,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.sql
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -552,6 +599,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.pgsql
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -566,6 +614,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.stylus
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -580,6 +629,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: text.html.swig
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -594,6 +644,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: text.xml
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -608,6 +659,7 @@ contexts:
         3: punctuation.definition.fenced.markdown
       push:
         - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.yaml
         - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
           captures:
             1: punctuation.definition.fenced.markdown
@@ -698,6 +750,7 @@ contexts:
     - match: '^(?=\S)(?![=-]{3,}(?=$))'
       push:
         - meta_scope: meta.paragraph.markdown
+        - include: html_comment
         - match: '^(?:\s*$|(?=[ ]{,3}>.))|(?=[ \t]*\n)(?<=^===|^====|=====|^---|^----|-----)[ \t]*\n|(?=^#)'
           pop: true
         - include: inline
@@ -710,6 +763,16 @@ contexts:
           scope: markup.heading.2.markdown
           captures:
             1: punctuation.definition.heading.markdown
+  html_comment:
+    - match: <!--
+      captures:
+        0: punctuation.definition.comment.html
+      push:
+        - meta_scope: comment.block.html
+        - match: '--\s*>'
+          pop: true
+        - match: "--"
+          scope: invalid.illegal.bad-comments-or-CDATA.html
   ampersand:
     - match: "&(?!([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+);)"
       comment: |
@@ -850,8 +913,7 @@ contexts:
       captures:
         1: punctuation.definition.heading.markdown
       push:
-        - meta_scope: markup.heading.1.markdown constant.other
-        - meta_content_scope: markup.heading.1.markdown constant.other
+        - meta_scope: markup.heading.markdown markup.heading.1.markdown constant.other
         - match: \s*(#*)$\n?
           captures:
             1: punctuation.definition.heading.markdown
@@ -861,8 +923,7 @@ contexts:
       captures:
         1: punctuation.definition.heading.markdown
       push:
-        - meta_scope: markup.heading.2.markdown constant.other
-        - meta_content_scope: markup.heading.2.markdown constant.other
+        - meta_scope: markup.heading.markdown markup.heading.2.markdown constant.other
         - match: \s*(#*)$\n?
           captures:
             1: punctuation.definition.heading.markdown
@@ -872,8 +933,7 @@ contexts:
       captures:
         1: punctuation.definition.heading.markdown
       push:
-        - meta_scope: markup.heading.3.markdown constant.other
-        - meta_content_scope: markup.heading.3.markdown constant.other
+        - meta_scope: markup.heading.markdown markup.heading.3.markdown constant.other
         - match: \s*(#*)$\n?
           captures:
             1: punctuation.definition.heading.markdown
@@ -883,8 +943,7 @@ contexts:
       captures:
         1: punctuation.definition.heading.markdown
       push:
-        - meta_scope: markup.heading.4.markdown constant.other
-        - meta_content_scope: markup.heading.4.markdown constant.other
+        - meta_scope: markup.heading.markdown markup.heading.4.markdown constant.other
         - match: \s*(#*)$\n?
           captures:
             1: punctuation.definition.heading.markdown
@@ -894,8 +953,7 @@ contexts:
       captures:
         1: punctuation.definition.heading.markdown
       push:
-        - meta_scope: markup.heading.5.markdown constant.other
-        - meta_content_scope: markup.heading.5.markdown constant.other
+        - meta_scope: markup.heading.markdown markup.heading.5.markdown constant.other
         - match: \s*(#*)$\n?
           captures:
             1: punctuation.definition.heading.markdown
@@ -905,8 +963,7 @@ contexts:
       captures:
         1: punctuation.definition.heading.markdown
       push:
-        - meta_scope: markup.heading.6.markdown constant.other
-        - meta_content_scope: markup.heading.6.markdown constant.other
+        - meta_scope: markup.heading.markdown markup.heading.6.markdown constant.other
         - match: \s*(#*)$\n?
           captures:
             1: punctuation.definition.heading.markdown
