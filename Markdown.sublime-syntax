@@ -913,7 +913,7 @@ contexts:
       captures:
         1: punctuation.definition.heading.markdown
       push:
-        - meta_scope: markup.heading.markdown markup.heading.1.markdown constant.other
+        - meta_scope: markup.heading.markdown markup.heading.1.markdown entity.name.section constant.other
         - match: \s*(#*)$\n?
           captures:
             1: punctuation.definition.heading.markdown
@@ -923,7 +923,7 @@ contexts:
       captures:
         1: punctuation.definition.heading.markdown
       push:
-        - meta_scope: markup.heading.markdown markup.heading.2.markdown constant.other
+        - meta_scope: markup.heading.markdown markup.heading.2.markdown entity.name.section constant.other
         - match: \s*(#*)$\n?
           captures:
             1: punctuation.definition.heading.markdown
@@ -933,7 +933,7 @@ contexts:
       captures:
         1: punctuation.definition.heading.markdown
       push:
-        - meta_scope: markup.heading.markdown markup.heading.3.markdown constant.other
+        - meta_scope: markup.heading.markdown markup.heading.3.markdown entity.name.section constant.other
         - match: \s*(#*)$\n?
           captures:
             1: punctuation.definition.heading.markdown
@@ -943,7 +943,7 @@ contexts:
       captures:
         1: punctuation.definition.heading.markdown
       push:
-        - meta_scope: markup.heading.markdown markup.heading.4.markdown constant.other
+        - meta_scope: markup.heading.markdown markup.heading.4.markdown entity.name.section constant.other
         - match: \s*(#*)$\n?
           captures:
             1: punctuation.definition.heading.markdown
@@ -953,7 +953,7 @@ contexts:
       captures:
         1: punctuation.definition.heading.markdown
       push:
-        - meta_scope: markup.heading.markdown markup.heading.5.markdown constant.other
+        - meta_scope: markup.heading.markdown markup.heading.5.markdown entity.name.section constant.other
         - match: \s*(#*)$\n?
           captures:
             1: punctuation.definition.heading.markdown
@@ -963,7 +963,7 @@ contexts:
       captures:
         1: punctuation.definition.heading.markdown
       push:
-        - meta_scope: markup.heading.markdown markup.heading.6.markdown constant.other
+        - meta_scope: markup.heading.markdown markup.heading.6.markdown entity.name.section constant.other
         - match: \s*(#*)$\n?
           captures:
             1: punctuation.definition.heading.markdown
