@@ -1,9 +1,9 @@
 # MarkdownHighlighting
 Sublime Text 3 Markdown grammar with scope names to provide some basic highlighting in all (default) themes.
 
-Most color schemes don't support the markdown syntax provided by the default package, or packages like Markdown Extended. This package provides some basic hooks for markdown syntax highlighting in any color scheme.
+Most color schemes don't support the markdown syntax provided by the default package, or even packages like Markdown Extended. This package provides some basic hooks for markdown syntax highlighting in any color scheme.
 
-Based on [Markdown Extended](https://github.com/jonschlinkert/sublime-markdown-extended), and includes Github Flavoured Markdown style fenced code blocks 
+Based on [Markdown Extended](https://github.com/jonschlinkert/sublime-markdown-extended), and includes Github Flavoured Markdown style fenced code blocks. You can also quickly jump to headings using Goto Symbol.
 
 Before  
 ![](https://raw.githubusercontent.com/braver/Markdown-Highlighting/master/before.png)
@@ -24,7 +24,7 @@ Adding these settings will create a centered view of 80 characters wide, which m
 "wrap_width": 80,
 ```
 
-If you use double trailing spaces to indicate line breaks, you don't want to trim white space:
+If you use double trailing spaces to indicate line breaks, you might not want to trim white space:
 
 ```json
 "trim_trailing_white_space_on_save": false,
