@@ -14,32 +14,34 @@ contexts:
     - match: (?=(?<!\s)---(\s*coffee|\s*json)?\n$)
       push: front-matter
     - match: ""
-      push: body
+      set: body
   front-matter:
-    - match: (?<!\s)---\n$
+    - match: ^\s*---\s*$
+      with_prototype:
+        - include: scope:source.yaml#prototype
       push:
         - meta_scope: markup.raw.yaml.front-matter
         - meta_content_scope: source.yaml
-        - match: ^---\s
+        - match: ^\s*---\s*
           pop: true
         - include: scope:source.yaml
-    - match: (?<!\s)---\s*coffee\n$
+    - match: ^\s*---\s*coffee\s*$
       push:
         - meta_scope: markup.raw.coffee.front-matter
         - meta_content_scope: source.coffee
-        - match: ^---\s
+        - match: ^\s*---\s*
           pop: true
         - include: scope:source.coffee
-    - match: (?<!\s)---\s*json\n$
+    - match: ^\s*---\s*json\s*$
       push:
         - meta_scope: markup.raw.json.front-matter
         - meta_content_scope: source.json
-        - match: ^---\s
+        - match: ^\s*---\s*
           pop: true
         - include: scope:source.json
     - match: ""
       pop: true
-      push: body
+      set: body
   body:
     - match: |-
         (?x)^
@@ -216,6 +218,21 @@ contexts:
             3: punctuation.definition.fenced.markdown
           pop: true
         - include: scope:source.go
+    - match: '(```|~~~|{%\s*highlight)\s*(graphql)\s*((?:linenos\s*)?%})?$'
+      captures:
+        1: punctuation.definition.fenced.markdown
+        2: variable.language.fenced.markdown
+        3: punctuation.definition.fenced.markdown
+      push:
+        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - meta_content_scope: source.graphql
+        - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
+          captures:
+            1: punctuation.definition.fenced.markdown
+            2: variable.language.fenced.markdown
+            3: punctuation.definition.fenced.markdown
+          pop: true
+        - include: scope:source.graphql
     - match: '(```|~~~|{%\s*highlight)\s*(hbs|handlebars|html|html5)\s*((?:linenos\s*)?%})?$'
       captures:
         1: punctuation.definition.fenced.markdown
@@ -502,6 +519,26 @@ contexts:
             3: punctuation.definition.fenced.markdown
           pop: true
         - include: scope:source.ruby
+    - match: '(```|~~~|{%\s*highlight)\s*(rails|erb|html\+ruby)\s*((?:linenos\s*)?%})?$'
+      captures:
+        1: punctuation.definition.fenced.markdown
+        2: variable.language.fenced.markdown
+        3: punctuation.definition.fenced.markdown
+      push:
+        - meta_scope: markup.raw.block.markdown markup.raw.block.fenced.markdown
+        - match: '(```|~~~|{%\s*endhighlight\s*%})\n'
+          captures:
+            1: punctuation.definition.fenced.markdown
+            2: variable.language.fenced.markdown
+            3: punctuation.definition.fenced.markdown
+          pop: true
+        - match: ''
+          push:
+            - meta_content_scope: text.html.ruby
+            - include: scope:text.html.ruby
+          with_prototype:
+            - match: '(?=(```|~~~|{%\s*endhighlight\s*%})\n)'
+              pop: true
     - match: '(```|~~~|{%\s*highlight)\s*(rust)\s*((?:linenos\s*)?%})?$'
       captures:
         1: punctuation.definition.fenced.markdown
@@ -763,6 +800,7 @@ contexts:
           scope: markup.heading.2.markdown
           captures:
             1: punctuation.definition.heading.markdown
+
   html_comment:
     - match: <!--
       captures:
@@ -1029,6 +1067,7 @@ contexts:
     - include: image-ref
     - include: link-ref-literal
     - include: link-ref
+    - include: latex-inline
   italic:
     - match: |-
         (?x)
@@ -1173,8 +1212,13 @@ contexts:
         - meta_scope: meta.paragraph.list.markdown
         - match: ^\s*$
           pop: true
+        - match: '^\s{0,4}([*+-]|([0-9]+)\.)(?=\s)'
+          captures:
+            1: punctuation.definition.list_item.markdown
+            2: punctuation.definition.list_item.number.markdown
         - include: inline
   raw:
+    - include: latex-display
     - match: '(`+)([^`]|(?!(?<!`)\1(?!`))`)*+(\1)'
       scope: markup.raw.inline.markdown support.class
       captures:
@@ -1252,3 +1296,36 @@ contexts:
         - include: image-ref
         - include: link-ref-literal
         - include: link-ref
+
+  latex-inline:
+    - match: \\\$
+    - match: |-
+        (?x)
+        (\$)(?=\S)
+        (?=
+          (?:
+            \\\\
+            |\\\$
+            |[^\$]
+          )*?
+          \S\$(?:[^a-zA-Z0-9]|$)
+        )
+      scope: string.other.math.latex punctuation.definition.string.begin.latex
+      push:
+        - meta_scope: text.tex.latex meta.environment.math.latex
+        - include: scope:text.tex.latex#macros
+        - include: scope:text.tex.latex#math-content
+        - match: \$
+          scope: string.other.math.latex punctuation.definition.string.end.latex
+          pop: true
+
+  latex-display:
+    - match: \$\$
+      scope: string.other.math.latex punctuation.definition.string.begin.latex
+      push:
+        - meta_scope: text.tex.latex meta.environment.math.latex
+        - include: scope:text.tex.latex#macros
+        - include: scope:text.tex.latex#math-content
+        - match: \$\$
+          scope: string.other.math.latex punctuation.definition.string.end.latex
+          pop: true
