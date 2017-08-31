@@ -1,9 +1,10 @@
 # MarkdownHighlighting
-Sublime Text 3 Markdown grammar with scope names to provide some basic highlighting in all (legacy) themes.
+Sublime Text 3 Markdown grammar with scope names to provide some basic highlighting in all (legacy) themes, including classics like [Tomorrow](https://packagecontrol.io/packages/Tomorrow%20Color%20Schemes).
 
 Most color schemes don't support the markdown syntax provided by the default package, or even packages like Markdown Extended. This package provides some basic hooks for markdown syntax highlighting in any color scheme.
 
-Based on [Markdown Extended](https://github.com/jonschlinkert/sublime-markdown-extended), and includes Github Flavoured Markdown style fenced code blocks. You can also quickly jump to headings using Goto Symbol.
+Based on the latest version of the [default Markdown package](https://github.com/sublimehq/Packages/tree/master/Markdown), and adds highlighting for Github Flavoured Markdown style fenced code blocks from 
+[Markdown Extended](https://github.com/jonschlinkert/sublime-markdown-extended).
 
 Before  
 ![](https://raw.githubusercontent.com/braver/Markdown-Highlighting/master/before.png)
