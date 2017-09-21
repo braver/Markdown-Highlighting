@@ -1,5 +1,5 @@
 # MarkdownHighlighting
-Sublime Text 3 Markdown grammar with scope names to provide some basic highlighting in all (legacy) themes, including classics like [Tomorrow](https://packagecontrol.io/packages/Tomorrow%20Color%20Schemes).
+Sublime Text 3 Markdown grammar with scope names to provide some basic highlighting in all (legacy) color schemes, including classics like [Tomorrow](https://packagecontrol.io/packages/Tomorrow%20Color%20Schemes).
 
 Most color schemes don't support the markdown syntax provided by the default package, or even packages like Markdown Extended. This package provides some basic hooks for markdown syntax highlighting in any color scheme.
 
